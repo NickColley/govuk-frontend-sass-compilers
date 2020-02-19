@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "spike-sass-compilers",
+  "version": "1.0.0",
+  "description": "Ruby sass latest 1. `gem install sass` 2. `sass ../../govuk-frontend/package/govuk/all.scss > ruby-sass.css`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-css-cli": "^4.3.0",
+    "node-sass": "*",
+    "sass": "*"
+  }
+}
