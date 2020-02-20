@@ -12,9 +12,17 @@ GOV.UK Frontend requires a minimum of:
 - Node sass version 3.13.x (Libsass 3.3.x)
 - Dart sass version 1.x
 
-TODO talk about wrappers here.
+We should recommend our users migrate away from Ruby sass as it has been deprecated.
 
 ## Ruby sass
+
+This is the original compiler for Sass.
+
+> Ruby Sass was the original implementation of Sass, but it reached its end of life as of 26 March 2019. It's no longer supported, and Ruby Sass users should migrate to another implementation.
+
+- [Ruby sass](https://sass-lang.com/ruby-sass)
+
+Users should migrate away from Ruby sass.
 
 Before each test setup with the following commands:
 - `gem uninstall sass`
@@ -29,19 +37,21 @@ Then build using:
 
 ### v3.7.4 (Latest)
 
-Verdict: succeeds
+**Verdict: succeeds ✅**
 
-diffeerence between this and node-sass 3.7.4 (libsass), rounding of some values
-- reording of seelectors (seen below too)
+The difference between this and Node sass v3.7.4 (libsass):
 
-difference between this and dartsass
+- rounding of some values (see examples below)
+- reordering of selectors (see examples below)
 
-- dart sass adds `@charset "UTF-8";` at the top
+The difference between this and Dart sass v1.25.0:
+
+- adds `@charset "UTF-8";` at the top
 - changes `\2014 ` to `—`
 
-expands media queries differently:
+It also expands media queries differently:
 
-dart-sass
+#### Dart sass
 ```scss
 
 @media (min-width:40.0625em) {
@@ -79,7 +89,7 @@ dart-sass
 }
 ```
 
-ruby sass:
+#### Ruby sass
 ```scss
 
 @media (min-width:40.0625em) {
@@ -113,28 +123,44 @@ ruby sass:
 }
 ```
 
-### 3.5.0
-verdict: succeeds
+### v3.5.0
 
-identical to 3.7.4
+**Verdict: succeeds ✅**
 
-### 3.4.0
-verdict: succeeds
+Identical to 3.7.4
 
-rounding differences in line-height values
-e.g.     line-height: 1.3157894737 (3.7.4) vs line-height: 1.31579 ( 3.4.0)
+### v3.4.0
 
-colour changes
-e.g.  .govuk-button:hover {
+**Verdict: succeeds ✅**
+
+Differences between this and latest:
+- rounding differences in line-height values
+e.g. `line-height: 1.3157894737` (3.7.4) vs `line-height: 1.31579` ( 3.4.0)
+
+- colour changes
+e.g.
+
+#### v3.7.4
+```css
+.govuk-button:hover {
   background-color: #005a30
-} (3.7.4)
+}
+```
 
-vs   background-color: #005930 (3.4.0)
+vs
 
-likely a difference in how the 'mix' function works.
+#### v3.4.0
+```css
+.govuk-button:hover {
+  background-color: #005930
+}
+```
 
-### 3.3.0
-verdict: fails
+Likely a difference in how the 'mix' function works.
+
+### v3.3.0
+
+**Verdict: fails ❌**
 
 ```log
 Syntax error: Functions can only contain variable declarations and control directives.
@@ -145,7 +171,8 @@ Syntax error: Functions can only contain variable declarations and control direc
 ```
 
 ### 3.2.0
-verdict: fails
+
+**Verdict: fails ❌**
 
 ```log
 Syntax error: Invalid CSS after "...rontend_toolkit": expected ")", was ": $govuk-compat..."
@@ -171,21 +198,23 @@ Then build using:
 - `node_modules/.bin/node-sass ../govuk-frontend/package/govuk/all.scss > node-sass/<VERSION-NUMBER-HERE>.css`
 - `node_modules/.bin/cleancss --format beautify node-sass/<VERSION-NUMBER-HERE>.css > node-sass/<VERSION-NUMBER-HERE>.min.css`
 
-#### 4.13.1 - latest
+#### v4.13.1 (Latest)
 LibSass: 3.5.4
 
-verdict: succeeds
 
-### 4.3.0
+**Verdict: succeeds ✅**
+
+### v4.3.0
 LibSass: 3.4.3
 
 Requires Node.js version 8:
 `nvm install v8.17.0`
 `node -v`
 
-verdict: succeeds
 
-same apart from this:
+**Verdict: succeeds ✅**
+
+#### v4.13.1
 ```scss
 @media print {
   .govuk-link[href^="/"]::after,
@@ -198,9 +227,10 @@ same apart from this:
 }
 ```
 
-4.3.0
-```scss
+vs
 
+#### 4.3.0
+```scss
 @media print {
   [href^="/"].govuk-link::after,
   [href^="http://"].govuk-link::after,
@@ -212,23 +242,24 @@ same apart from this:
 }
 ```
 
-### 3.13.1
+### v3.13.1
 LibSass: 3.3.6
 
 Requires Node.js version 8:
 `nvm install v8.17.0`
 `node -v`
 
-verdict: same as 4.3.0
+**Verdict: succeeds ✅ (same as 4.3.0)**
 
-### 3.3.3
+### v3.3.3
 LibSass: 3.2.5
 
 Requires Node.js version 5:
 `nvm install v4.0.0`
 `node -v`
 
-verdict: fails
+
+**Verdict: fails ❌**
 
 ```log
 {
@@ -240,7 +271,9 @@ verdict: fails
 }
 ```
 
-## Dart sass 1.25.0 - latest
+## Dart sass
+
+### v1.25.0 (latest)
 
 Requires Node.js version 5:
 `nvm install v12.13.1`
@@ -249,3 +282,5 @@ Requires Node.js version 5:
 Build with:
 - `node_modules/.bin/sass ../govuk-frontend/package/govuk/all.scss > dart-sass/1-25-0.css`
 - `node_modules/.bin/cleancss --format beautify dart-sass/1-25-0.css > dart-sass/1-25-0.min.css`
+
+**Verdict: succeeds ✅**
