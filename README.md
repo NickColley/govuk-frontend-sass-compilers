@@ -5,7 +5,7 @@
 
 ## Overall summary
 
-GOV.UK Frontend requires a minimum of:
+GOV.UK Frontend requires a minimum of either:
 
 - Dart sass v1.x+
 - Libsass v3.3.x+ (Node sass 3.13.x+)
