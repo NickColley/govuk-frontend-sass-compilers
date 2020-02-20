@@ -1,6 +1,5 @@
 # Comparison of building GOV.UK Frontend with different Sass compilers
 
-
 - [meld](https://meldmerge.org/) to check the different output.
 - `cleancss` to remove formatting differences which makes diffing hard.
 
@@ -8,11 +7,13 @@
 
 GOV.UK Frontend requires a minimum of:
 
-- Ruby sass version 3.4.x
-- Node sass version 3.13.x (Libsass 3.3.x)
-- Dart sass version 1.x
+- Dart sass v1.x+
+- Libsass v3.3.x+ (Node sass 3.13.x+)
+- Ruby sass v3.4.x+
 
 We should recommend our users migrate away from Ruby sass as it has been deprecated.
+
+The GOV.UK Frontend project can consider integrating Dart sass (npm package `sass`) and Node sass (libsass, npm package `node-sass`) in it's build pipeline, but not Ruby sass.
 
 ## Ruby sass
 
